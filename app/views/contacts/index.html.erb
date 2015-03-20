@@ -1,0 +1,35 @@
+<div class="col-md-12 layout_me">
+  <div class="group">
+    <%= link_to("新的名單", new_contact_path , :class => "btn btn-primary pull-right" ) %>
+  </div>
+  
+  <table class="table table-hover">
+    <thead>
+      <tr> 
+        <th width= 10px> # </th>
+        <th> 名字 </th>
+        <th> 生日 </th>
+        <th> 電話 </th>
+        <th> 地址 </th>
+        <th> 備註 </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @contacts.each do |contact| %>
+        <tr>
+          <td width= 10px> # </td>
+          <td><%= link_to(contact.name, contact_path(contact))  %></td>
+          <td><%= contact.birthday  %></td>
+          <td><%= contact.phone  %></td>
+          <td><%= contact.address  %></td>
+          <td><%= contact.remark %></td>
+          <td>
+            <%=link_to("修改", edit_contact_path(contact), class: "btn btn-sm btn-default")%>
+            <%= link_to("刪除", contact_path(contact), method: :delete, data: {confirm: "你確定嗎？刪錯要重打歐！！！" }, class: "btn btn-sm btn-default") %>
+            
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
