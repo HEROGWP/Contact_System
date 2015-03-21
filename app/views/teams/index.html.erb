@@ -1,0 +1,27 @@
+<div class="col-md-12 layout_me">
+  <div class="group">
+    <%= link_to("新的點名表", new_team_path , :class => "btn btn-primary pull-right" ) %>
+  </div>
+  
+  <table class="table table-hover">
+    <thead>
+      <tr> 
+        <th> # </th>
+        <th> 聚會日期 </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @teams.each do |team| %>
+        <tr>
+          <td > # </td>
+          <td><%= link_to(team.when, team_path(team))  %></td>
+          <td>
+            <%=link_to("修改", edit_team_path(team), class: "btn btn-sm btn-default")%>
+            <%= link_to("刪除", team_path(team), method: :delete, data: {confirm: "你確定嗎？刪錯要重打歐！！！" }, class: "btn btn-sm btn-default") %>
+            
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

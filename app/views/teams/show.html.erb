@@ -1,0 +1,26 @@
+<div class="col-md-12 layout_me">
+  
+  <table class="table table-hover">
+    <thead>
+      <tr> 
+        <th> # </th>
+        <th> 點名 </th>
+        <th> 名字 </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @contacts.each do |contact| %>
+        <tr>
+          <td> # </td>
+          <td> <%=link_to("到", join_team_path(@team.id, contact), method: :post, class: "btn btn-sm btn-default")%> 
+               <%#=link_to("沒到", join_team_path(team), class: "btn btn-sm btn-default")%>
+          </td>
+          <td><%= contact.name %></td>
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%# binding.pry %>

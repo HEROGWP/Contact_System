@@ -1,0 +1,19 @@
+
+
+
+<%= form_for @team do |f| %>
+  <div class="form-group">
+    <%= f.label "聚會日期" %>:
+    <%= f.date_field :when, class: "form-control" %><br />
+    
+    <%= f.label "點名表" %>:
+
+    <%#= f.collection_check_boxes :team, :contact_ids, Contact.all, :id,:name_with_initial%>
+    
+    <%#= f.collection_check_boxes :contact_ids, Contact.all, :id, :name_with_initial do |cb| %>
+      <%#= cb.label( class:"checkbox inline"){cb.check_box(class:"checkbox")+cb.text} %>
+    <%# end %><br />
+  </div>
+
+  <%= f.submit "確認", data: {disable_with: '確認中...'}, class: "btn btn-primary"%>
+<% end %>
