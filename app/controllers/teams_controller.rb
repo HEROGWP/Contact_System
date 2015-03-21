@@ -38,12 +38,17 @@ class TeamsController < ApplicationController
   end
   
   def join
-    binding.pry
     @team = Team.find(params[:id])
     @contact = @team.contact_teams.create(contact_id: join_params[:format])
-    redirect_to team_path(params[:id]), notice: "成功"
+    redirect_to team_path(params[:id]), notice: "#{Contact.find(join_params[:format]).name}點名成功"
   end
-
+  
+  def quit
+    @team = Team.find(params[:id])
+    @contact = @team.contact_teams.find_by(contact_id: join_params[:format])
+    @contact.destroy
+    redirect_to team_path(params[:id]), alert: "#{Contact.find(join_params[:format]).name}缺席"
+  end
 
   private
 

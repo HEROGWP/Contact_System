@@ -12,8 +12,13 @@
       <% @contacts.each do |contact| %>
         <tr>
           <td> # </td>
-          <td> <%=link_to("到", join_team_path(@team.id, contact), method: :post, class: "btn btn-sm btn-default")%> 
-               <%#=link_to("沒到", join_team_path(team), class: "btn btn-sm btn-default")%>
+          <td>
+          <%# binding.pry %>
+            <%if !@team.contact_teams.where(contact_id: contact).present? %>
+              <%=link_to("到", join_team_path(@team.id, contact), method: :post, class: "btn btn-sm btn-default")%> 
+            <% else %>
+              <%=link_to("沒到", quit_team_path(@team.id, contact), method: :post,class: "btn btn-sm btn-default")%>
+            <% end %>
           </td>
           <td><%= contact.name %></td>
 

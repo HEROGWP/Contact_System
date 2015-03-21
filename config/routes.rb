@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :teams do 
     member do 
       post 'join'
+      post 'quit'
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.
