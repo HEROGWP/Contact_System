@@ -16,7 +16,7 @@
     <%= f.label "*姓名" %>:
     <%= f.text_field :name, class: "form-control" %><br />
 
-    <%= f.label "生日" %>:
+    <%= f.label "*生日" %>:
     <%= f.date_field :birthday, class: "form-control" %><br />
 
     <%= f.label "電話" %>:
@@ -29,5 +29,5 @@
     <%= f.text_area :remark, class: "form-control" %><br />
   </div>
 
-  <%= f.submit "確認", data: {disable_with: '確認中...'}, class: "btn btn-primary"%>
+  <%= f.submit "確認", data: {disable_with: '儲存中...'}, class: "btn btn-primary"%>
 <% end %>

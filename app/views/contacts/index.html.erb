@@ -1,9 +1,9 @@
-<div class="col-md-12 layout_me">
+<div class="col-md-12">
   <div class="group">
     <%= link_to("新的名單", new_contact_path , :class => "btn btn-primary pull-right" ) %>
   </div>
   
-  <table class="table table-hover">
+  <table class="table table-hover table-striped">
     <thead>
       <tr> 
         <th width= 10px> # </th>
@@ -15,7 +15,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @contacts.each do |contact| %>
+      <% @contact_pages.each do |contact| %>
         <tr>
           <td width= 10px> # </td>
           <td><%= link_to(contact.name, contact_path(contact))  %></td>
@@ -32,4 +32,5 @@
       <% end %>
     </tbody>
   </table>
+  <%= will_paginate @contact_pages, renderer: BootstrapPagination::Rails %>
 </div>

@@ -1,14 +1,9 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <%= link_to("青蟲關懷系統", contacts_path, class: "navbar-brand") %>
+      <%= link_to("青蟲關懷系統", teams_path, class: "navbar-brand") %>
     </div>
     <div>
-      <ul class="nav navbar-nav">
-        <li> <%= link_to("Page 1", '#') %> </li>
-        <li> <%= link_to("Page 2", '#') %> </li> 
-        <li> <%= link_to("Page 3", '#') %> </li> 
-      </ul>
       <ul class="nav navbar-nav navbar-right">
       <% if !current_user %>
         <li> <%= link_to("註冊", new_user_registration_path, class: "glyphicon glyphicon-user") %> </li>
@@ -23,6 +18,7 @@
             <li> <%= link_to("修改帳戶", edit_user_registration_path )%></li>
             <li> <%= link_to("通訊錄",contacts_path )%></li>
             <li> <%= link_to("點名表", teams_path )%></li>
+            <li> <%= link_to("壽星查詢", birthday_path )%></li>
             <li class="divider"></li>
             <li> <%= link_to("登出", destroy_user_session_path, method: :delete)%> </li>
           </ul>

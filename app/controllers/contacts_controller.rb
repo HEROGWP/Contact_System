@@ -2,7 +2,8 @@ class ContactsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-  	@contacts = Contact.all
+  	#@contacts = Contact.all
+    @contact_pages = Contact.paginate(:page => params[:page], :per_page => 9)
   end
   
   def create
@@ -16,7 +17,8 @@ class ContactsController < ApplicationController
   end
 
   def show
-  	
+  	@contact =current_user.contacts.find(params[:id])
+    @participated_teams = @contact.participated_teams.all
   end
 
   def edit

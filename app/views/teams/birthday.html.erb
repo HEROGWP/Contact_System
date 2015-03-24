@@ -1,0 +1,60 @@
+<div class="col-md-12">  
+  <%= form_tag("/birthday", method: "get", data: { turboform: ''}) do %>
+    <div class="form-group check_center">
+<!--     <%# while @i<12 %>
+  	  <label class="checkbox-inline">
+        <%= check_box_tag(@month,@i)%>@i
+      </label>
+    <%# end %> -->
+
+    <%
+ 		# a = [1, 2, 3, 4, 5]
+ 		# a = {1 => true, 2 => true, 3 = > true}
+    %>
+    <div class="btn-group" role="group" aria-label="...">
+	    <% (1..12).each do |month| %>
+	    	<%= check_box_tag("mons[#{month}]", 1, params[:mons].has_key?(month.to_s), class: 'hide') %>
+	    	<% if params[:mons].has_key?(month.to_s) %>
+	    		<button type="button" class="btn btn-primary btn-month"><%= month %></button>
+	    	<% else %>
+	    		<button type="button" class="btn btn-default btn-month"><%= month %></button>
+	    	<% end %>
+	    <% end %>
+    </div>
+    </div>
+  <% end %>
+
+
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr> 
+        <th width= 10px> # </th>
+        <th> 名字 </th>
+        <th> 生日 </th>
+        <th> 電話 </th>
+        <th> 地址 </th>
+        <th> 備註 </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @birthday.each do |contact| %>
+        <tr>
+          <td width= 10px> # </td>
+          <td><%= link_to(contact.name, contact_path(contact))  %></td>
+          <td><%= contact.birthday  %></td>
+          <td><%= contact.phone  %></td>
+          <td><%= contact.address  %></td>
+          <td><%= contact.remark %></td>
+          <td>
+            <%=link_to("修改", edit_contact_path(contact), class: "btn btn-sm btn-default")%>
+            <%= link_to("刪除", contact_path(contact), method: :delete, data: {confirm: "你確定嗎？刪錯要重打歐！！！" }, class: "btn btn-sm btn-default") %>
+            
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate @birthday, renderer: BootstrapPagination::Rails %>
+</div>
+
+<%= javascript_include_tag 'birthday' %>

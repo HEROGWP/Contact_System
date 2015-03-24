@@ -1,0 +1,21 @@
+<div class="col-md-12">  
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr> 
+        <th> # </th>
+        <th> 聚會日期 </th>
+        <th> 聚會人數 </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @participated_teams.each do |team| %>
+        <tr>
+          <td > # </td>
+          <td><%= team.when  %></td>
+          <td><%= team.contact_teams.count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+

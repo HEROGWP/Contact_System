@@ -2,7 +2,8 @@ class TeamsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-  	@teams = Team.all
+  	#@teams = Team.all.order(when: :DESC)
+    @team_pages = Team.page(params[:page]).order(when: :DESC)
   end
 
   def new
@@ -11,18 +12,18 @@ class TeamsController < ApplicationController
 
   def create
   	@team = current_user.teams.create(team_params)
-    
     @team.save ? (redirect_to teams_path) : (flash[:warning] = "有＊的欄位必填，請重新確認"; render :new)
   end
 
   def edit
-  	@team = current_user.teams.find([:id])
+    #binding.pry
+  	@team = current_user.teams.find(params[:id])
   end
  
   def update
-  	@team = current_user.teams.find([:id])
+  	@team = current_user.teams.find(params[:id])
 
-  	@team ? (redirect_to teams_path, notice: "修改成功") : (render :edit)
+  	@team.update(team_params) ? (redirect_to teams_path, notice: "修改成功") : (render :edit)
   end
 
   def show
@@ -31,7 +32,7 @@ class TeamsController < ApplicationController
   end
 
   def destroy
-  	@team = current_user.teams.find([:id])
+  	@team = current_user.teams.find(params[:id])
   	@team.destroy
 
   	redirect_to teams_path, alert: "刪除成功"
@@ -39,8 +40,12 @@ class TeamsController < ApplicationController
   
   def join
     @team = Team.find(params[:id])
-    @contact = @team.contact_teams.create(contact_id: join_params[:format])
-    redirect_to team_path(params[:id]), notice: "#{Contact.find(join_params[:format]).name}點名成功"
+    if !@team.contact_teams.where(contact_id: join_params[:format]).present?
+      @contact = @team.contact_teams.create(contact_id: join_params[:format])
+      redirect_to team_path(params[:id]), notice: "#{Contact.find(join_params[:format]).name}點名成功"
+    else
+      redirect_to team_path(params[:id]), notice: "#{Contact.find(join_params[:format]).name}點名成功"
+    end 
   end
   
   def quit
@@ -50,6 +55,12 @@ class TeamsController < ApplicationController
     redirect_to team_path(params[:id]), alert: "#{Contact.find(join_params[:format]).name}缺席"
   end
 
+  def birthday
+    params[:mons] ||= {}
+    @monthes = params[:mons].keys.map(&:to_i)
+    #monthes = params[:mons].map(&:to_i)
+    @birthday = Contact.where(month: @monthes).page(params[:page])
+  end
   private
 
   def team_params

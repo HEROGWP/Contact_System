@@ -1,26 +1,24 @@
-<div class="col-md-12 layout_me">
+<div class="col-md-12">
   
-  <table class="table table-hover">
+  <table class="table table-hover table_center">
     <thead>
       <tr> 
-        <th> # </th>
-        <th> 點名 </th>
-        <th> 名字 </th>
+        <th class="font_size"> 出席狀態 </th>
+        <th class="font_size"> 名字 </th>
       </tr>
     </thead>
     <tbody>
       <% @contacts.each do |contact| %>
         <tr>
-          <td> # </td>
           <td>
           <%# binding.pry %>
             <%if !@team.contact_teams.where(contact_id: contact).present? %>
-              <%=link_to("到", join_team_path(@team.id, contact), method: :post, class: "btn btn-sm btn-default")%> 
+              <%=link_to("", join_team_path(@team.id, contact), method: :post, class: "btn btn-danger btn-lg glyphicon glyphicon-remove")%> 
             <% else %>
-              <%=link_to("沒到", quit_team_path(@team.id, contact), method: :post,class: "btn btn-sm btn-default")%>
+              <%=link_to("", quit_team_path(@team.id, contact), method: :post,class: "btn btn-success btn-lg glyphicon glyphicon-ok")%>
             <% end %>
           </td>
-          <td><%= contact.name %></td>
+          <td class="font_size"><%= contact.name %></td>
 
         </tr>
       <% end %>

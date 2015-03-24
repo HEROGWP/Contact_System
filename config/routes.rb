@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  root 'contacts#index'
+  root 'teams#index'
   resources :contacts
   resources :teams do 
     member do 
@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       post 'quit'
     end
   end
+  get 'birthday', to: 'teams#birthday'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

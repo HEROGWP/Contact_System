@@ -1,6 +1,7 @@
 class Contact < ActiveRecord::Base
-  validates :name, :presence => true
+  validates :name, :birthday, :presence => true
 
+  self.per_page = 9
   belongs_to :owner, class_name: "User", foreign_key: :user_id
   has_many :participated_teams, through: :contact_teams, source: :team
   has_many :contact_teams
@@ -9,7 +10,9 @@ class Contact < ActiveRecord::Base
   # def name_with_initial
   #   "#{name}"
   # end
-
+  before_create do
+    self.month = self.birthday.month
+  end
 
 
 end
