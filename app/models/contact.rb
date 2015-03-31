@@ -13,6 +13,7 @@ class Contact < ActiveRecord::Base
   before_create do
     self.month = self.birthday.month
   end
-
-
+  before_update do
+    self.month = self.birthday.month
+  end
 end

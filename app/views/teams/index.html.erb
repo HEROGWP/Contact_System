@@ -1,6 +1,6 @@
 <div class="col-md-12">
   <div class="group">
-    <%= link_to("新的點名表", new_team_path , :class => "btn btn-primary pull-right" ) %>
+    <%= link_to("新的點名表", new_team_path, class: "btn btn-primary pull-right") %>
   </div>
   
   <table class="table table-hover table-striped">
@@ -18,14 +18,14 @@
           <td><%= link_to(team.when, team_path(team))  %></td>
           <td><%= team.contact_teams.count %></td>
           <td>
-            <%=link_to("修改", edit_team_path(team), class: "btn btn-sm btn-default")%>
-            <%= link_to("刪除", team_path(team), method: :delete, data: {confirm: "你確定嗎？刪錯要重打歐！！！" }, class: "btn btn-sm btn-default") %>
+            <%=link_to("", edit_team_path(team), class: "btn btn-sm btn-info glyphicon glyphicon-pencil")%>
+            <%= link_to("", team_path(team), method: :delete, data: {confirm: "你確定嗎？刪錯要重打歐！！！" }, class: "btn btn-sm btn-danger glyphicon glyphicon-trash") %>
             
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
-  <%= will_paginate @team_pages, renderer: BootstrapPagination::Rails %>
+  <%= will_paginate @team_pages, :previous_label => '←上一頁', :next_label => '下一頁→', renderer: BootstrapPagination::Rails %>
 </div>
 

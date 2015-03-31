@@ -1,6 +1,6 @@
 <div class="col-md-12">
   <div class="group">
-    <%= link_to("新的名單", new_contact_path , :class => "btn btn-primary pull-right" ) %>
+    <%= link_to("新的名單", new_contact_path, class: "btn btn-primary pull-right" ) %>
   </div>
   
   <table class="table table-hover table-striped">
@@ -24,13 +24,13 @@
           <td><%= contact.address  %></td>
           <td><%= contact.remark %></td>
           <td>
-            <%=link_to("修改", edit_contact_path(contact), class: "btn btn-sm btn-default")%>
-            <%= link_to("刪除", contact_path(contact), method: :delete, data: {confirm: "你確定嗎？刪錯要重打歐！！！" }, class: "btn btn-sm btn-default") %>
+            <%=link_to("", edit_contact_path(contact), class: "btn btn-sm btn-info glyphicon glyphicon-pencil")%>
+            <%= link_to("", contact_path(contact), method: :delete, data: {confirm: "你確定嗎？刪錯要重打歐！！！" }, class: "btn btn-sm btn-danger glyphicon glyphicon-trash") %>
             
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
-  <%= will_paginate @contact_pages, renderer: BootstrapPagination::Rails %>
+  <%= will_paginate @contact_pages, :previous_label => '←上一頁', :next_label => '下一頁→', renderer: BootstrapPagination::Rails %>
 </div>

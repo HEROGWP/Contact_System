@@ -18,7 +18,7 @@ class ContactsController < ApplicationController
 
   def show
   	@contact =current_user.contacts.find(params[:id])
-    @participated_teams = @contact.participated_teams.all
+    @participated_teams = @contact.participated_teams.all.order(when: :DESC)
   end
 
   def edit
