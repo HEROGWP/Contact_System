@@ -28,5 +28,7 @@
     </div>
   </div>
 </div>
-<%= will_paginate @contacts,:previous_label => '←上一頁', :next_label => '下一頁→', renderer: BootstrapPagination::Rails %>
+<div class="center">
+  <%= will_paginate @contacts,:previous_label => '←上一頁', :next_label => '下一頁→', renderer: BootstrapPagination::Rails  %>
+</div>
 <%# binding.pry %>
