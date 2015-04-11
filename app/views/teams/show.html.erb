@@ -4,8 +4,8 @@
       <table class="table table-hover">
         <thead>
           <tr> 
-            <th> 出席 </th>
-            <th> 名字 </th>
+            <th class="font_size"> 出席 </th>
+            <th class="font_size"> 名字 </th>
           </tr>
         </thead>
         <tbody>
@@ -15,12 +15,12 @@
               <td>
               <%# binding.pry %>
                 <%if !@team.contact_teams.where(contact_id: contact).present? %>
-                  <%=link_to("", join_team_path(@team.id, contact), method: :post, class: "btn btn-danger btn-xs glyphicon glyphicon-remove")%> 
+                  <%=link_to("", join_team_path(@team.id, contact), method: :post, class: "btn btn-danger btn-lg glyphicon glyphicon-remove")%> 
                 <% else %>
-                  <%=link_to("", quit_team_path(@team.id, contact), method: :post,class: "btn btn-success btn-xs glyphicon glyphicon-ok")%>
+                  <%=link_to("", quit_team_path(@team.id, contact), method: :post,class: "btn btn-success btn-lg glyphicon glyphicon-ok")%>
                 <% end %>
               </td>
-              <td><%= contact.name %></td>
+              <td class="font_size"><%= contact.name %></td>
             </tr>
           <% end %>
         </tbody>
