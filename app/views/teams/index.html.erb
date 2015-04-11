@@ -1,5 +1,6 @@
 <div class="col-md-12">
   <div class="group">
+    <%= link_to("公開的此頁面", public_path(current_user.id), class: "btn btn-success pull-left") %>
     <%= link_to("新的點名表", new_team_path, class: "btn btn-primary pull-right") %>
   </div>
   

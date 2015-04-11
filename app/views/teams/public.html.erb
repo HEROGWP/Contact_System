@@ -1,0 +1,23 @@
+<div class="col-md-12">  
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr> 
+        <th> # </th>
+        <th> 聚會日期 </th>
+        <th> 聚會人數 </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @team_pages.each do |team| %>
+        <tr>
+          <td > # </td>
+          <td><%= team.when %></td>
+          <td><%= team.contact_teams.count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate @team_pages, :previous_label => '←上一頁', :next_label => '下一頁→', renderer: BootstrapPagination::Rails %>
+</div>
+<%# binding.pry %>
+

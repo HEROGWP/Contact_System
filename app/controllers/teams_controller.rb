@@ -1,9 +1,10 @@
 class TeamsController < ApplicationController
   before_action :authenticate_user!
-
+  skip_before_action :authenticate_user!, only: [:public]
+  
   def index
   	#@teams = Team.all.order(when: :DESC)
-    @team_pages = Team.page(params[:page]).order(when: :DESC)
+    @team_pages = current_user.teams.page(params[:page]).order(when: :DESC)
   end
 
   def new
@@ -27,8 +28,9 @@ class TeamsController < ApplicationController
   end
 
   def show
-    @team = Team.find(params[:id])
-  	@contacts = Contact.all
+    @team = current_user.teams.find(params[:id])
+    #@contacts = current_user.contacts.all
+  	@contacts = current_user.contacts.paginate(:page => params[:page], :per_page => 10)
   end
 
   def destroy
@@ -42,9 +44,9 @@ class TeamsController < ApplicationController
     @team = Team.find(params[:id])
     if !@team.contact_teams.where(contact_id: join_params[:format]).present?
       @contact = @team.contact_teams.create(contact_id: join_params[:format])
-      redirect_to team_path(params[:id]), notice: "#{Contact.find(join_params[:format]).name}點名成功"
+      redirect_to :back#, notice: "#{Contact.find(join_params[:format]).name}點名成功"
     else
-      redirect_to team_path(params[:id]), notice: "#{Contact.find(join_params[:format]).name}點名成功"
+      redirect_to :back#, notice: "#{Contact.find(join_params[:format]).name}點名成功"
     end 
   end
   
@@ -52,14 +54,19 @@ class TeamsController < ApplicationController
     @team = Team.find(params[:id])
     @contact = @team.contact_teams.find_by(contact_id: join_params[:format])
     @contact.destroy
-    redirect_to team_path(params[:id]), alert: "#{Contact.find(join_params[:format]).name}缺席"
+    redirect_to :back#, alert: "#{Contact.find(join_params[:format]).name}缺席"
   end
 
   def birthday
     params[:mons] ||= {}
     @monthes = params[:mons].keys.map(&:to_i)
     #monthes = params[:mons].map(&:to_i)
-    @birthday = Contact.where(month: @monthes).page(params[:page])
+    @birthday = current_user.contacts.where(month: @monthes).page(params[:page])
+  end
+
+  def public
+    @user = User.find(params[:id])
+    @team_pages = @user.teams.paginate(:page => params[:page], :per_page => 11).order(when: :DESC)
   end
   private
 

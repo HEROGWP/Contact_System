@@ -1,29 +1,32 @@
-<div class="col-md-12">
-  
-  <table class="table table-hover table_center">
-    <thead>
-      <tr> 
-        <th class="font_size"> 出席狀態 </th>
-        <th class="font_size"> 名字 </th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @contacts.each do |contact| %>
-        <tr>
-          <td>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-4 col-xs-offset-4">
+      <table class="table table-hover">
+        <thead>
+          <tr> 
+            <th> 出席 </th>
+            <th> 名字 </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @contacts.each do |contact| %>
           <%# binding.pry %>
-            <%if !@team.contact_teams.where(contact_id: contact).present? %>
-              <%=link_to("", join_team_path(@team.id, contact), method: :post, class: "btn btn-danger btn-lg glyphicon glyphicon-remove")%> 
-            <% else %>
-              <%=link_to("", quit_team_path(@team.id, contact), method: :post,class: "btn btn-success btn-lg glyphicon glyphicon-ok")%>
-            <% end %>
-          </td>
-          <td class="font_size"><%= contact.name %></td>
-
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+            <tr>
+              <td>
+              <%# binding.pry %>
+                <%if !@team.contact_teams.where(contact_id: contact).present? %>
+                  <%=link_to("", join_team_path(@team.id, contact), method: :post, class: "btn btn-danger btn-xs glyphicon glyphicon-remove")%> 
+                <% else %>
+                  <%=link_to("", quit_team_path(@team.id, contact), method: :post,class: "btn btn-success btn-xs glyphicon glyphicon-ok")%>
+                <% end %>
+              </td>
+              <td><%= contact.name %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
-
+<%= will_paginate @contacts,:previous_label => '←上一頁', :next_label => '下一頁→', renderer: BootstrapPagination::Rails %>
 <%# binding.pry %>

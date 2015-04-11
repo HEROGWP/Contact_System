@@ -3,7 +3,7 @@ class ContactsController < ApplicationController
 
   def index
   	#@contacts = Contact.all
-    @contact_pages = Contact.paginate(:page => params[:page], :per_page => 9)
+    @contact_pages = current_user.contacts.paginate(:page => params[:page], :per_page => 9)
   end
   
   def create

@@ -6,7 +6,7 @@
       </label>
     <%# end %> -->
 
-    <%
+    <%#
  		# a = [1, 2, 3, 4, 5]
  		# a = {1 => true, 2 => true, 3 = > true}
     %>
@@ -43,11 +43,6 @@
           <td><%= contact.phone  %></td>
           <td><%= contact.address  %></td>
           <td><%= contact.remark %></td>
-          <td>
-            <%=link_to("修改", edit_contact_path(contact), class: "btn btn-sm btn-default")%>
-            <%= link_to("刪除", contact_path(contact), method: :delete, data: {confirm: "你確定嗎？刪錯要重打歐！！！" }, class: "btn btn-sm btn-default") %>
-            
-          </td>
         </tr>
       <% end %>
     </tbody>
