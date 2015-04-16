@@ -1,26 +1,38 @@
-<div class="container">
-  <div class="row">
-    <div class="col-xs-4 col-xs-offset-4">
-      <table class="table table-hover table_width">
-        <tbody>
-          <% @contacts.each do |contact| %>
+<head>
+<style>
+@media screen and (max-width: 767px) {
+  .margin_left {
+    margin-left: 100px;
+  }
+}
+
+@media screen and (max-device-width: 767 px) {
+  .margin_left {
+    margin-left: 100px;
+  }
+}
+</style>
+</head>
+
+<div class="margin_left">
+  <table class="table table-hover table_width">
+    <tbody>
+      <% @contacts.each do |contact| %>
+      <%# binding.pry %>
+        <tr>
+          <td>
           <%# binding.pry %>
-            <tr>
-              <td>
-              <%# binding.pry %>
-                <%if !@team.contact_teams.where(contact_id: contact).present? %>
-                  <%=link_to("", join_team_path(@team.id, contact), method: :post, class: "btn btn-danger btn-xs glyphicon glyphicon-remove")%> 
-                <% else %>
-                  <%=link_to("", quit_team_path(@team.id, contact), method: :post,class: "btn btn-success btn-xs glyphicon glyphicon-ok")%>
-                <% end %>
-              </td>
-              <td><%= contact.name %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
+            <%if !@team.contact_teams.where(contact_id: contact).present? %>
+              <%=link_to("", join_team_path(@team.id, contact), method: :post, class: "btn btn-danger btn-xs glyphicon glyphicon-remove")%> 
+            <% else %>
+              <%=link_to("", quit_team_path(@team.id, contact), method: :post,class: "btn btn-success btn-xs glyphicon glyphicon-ok")%>
+            <% end %>
+          </td>
+          <td><%= contact.name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 <div class="center">
   <%= will_paginate @contacts,:previous_label => '←上一頁', :next_label => '下一頁→', renderer: BootstrapPagination::Rails  %>
