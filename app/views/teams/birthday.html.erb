@@ -13,19 +13,19 @@
     <div class="btn-group" role="group" aria-label="...">
 	    <% (1..12).each do |month| %>
 	    	<%= check_box_tag("mons[#{month}]", 1, params[:mons].has_key?(month.to_s), class: 'hide') %>
-        <% if month == 10 || month == 11 || month == 12%>
-          <% re_month = month.to_s %>
-        <% else %>
-          <% re_month = "0" + month.to_s %>
-        <% end %>
+        <%# if month == 10 || month == 11 || month == 12%>
+          <%# re_month = month.to_s %>
+        <%# else %>
+          <%# re_month = "0" + month.to_s %>
+        <%# end %>
 
 
 	    	<% if params[:mons].has_key?(month.to_s) %>
-	    		<button type="button" class="btn btn-primary btn-month "><%= re_month %></button>
+	    		<button type="button" class="btn btn-primary btn-month "><%= sprintf("%02d", month) %></button>
 	    	<% else %>
-	    		<button type="button" class="btn btn-default btn-month "><%= re_month %></button>
+	    		<button type="button" class="btn btn-default btn-month "><%= sprintf("%02d", month) %></button>
 	    	<% end %>
-        <% if re_month == "06"%>
+        <% if sprintf("%02d", month) == "06"%>
           <br>
         <% end %>
 	    <% end %>
