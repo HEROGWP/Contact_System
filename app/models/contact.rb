@@ -16,4 +16,15 @@ class Contact < ActiveRecord::Base
   before_update do
     self.month = self.birthday.month
   end
+
+  def self.to_csv
+    CSV.generate do |csv|
+      output_header = ["姓名", "生日","電話","地址", "備註"]
+      output_values = ["name", "birthday", "phone", "address", "remark"]
+      csv << output_header
+      all.each do |contact|
+        csv << contact.attributes.values_at(*output_values)
+      end
+    end
+  end
 end

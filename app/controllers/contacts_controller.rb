@@ -2,8 +2,12 @@ class ContactsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-  	#@contacts = Contact.all
+  	@contacts = current_user.contacts
     @contact_pages = current_user.contacts.paginate(:page => params[:page], :per_page => 9)
+    respond_to do |format|
+      format.html
+      format.csv { send_data @contacts.to_csv }
+    end
   end
   
   def create
