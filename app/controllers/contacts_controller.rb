@@ -7,6 +7,7 @@ class ContactsController < ApplicationController
     respond_to do |format|
       format.html
       format.csv { send_data @contacts.to_csv }
+      format.xls { send_data @contacts.to_xls(@contacts), :filename => "contacts.xls", :type =>  "application/vnd.ms-excel"}
     end
   end
   

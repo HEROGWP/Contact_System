@@ -27,4 +27,32 @@ class Contact < ActiveRecord::Base
       end
     end
   end
+  
+  def self.to_xls(a)
+    book = Spreadsheet::Workbook.new
+    sheet1 = book.create_worksheet :name => '青蟲名單'
+    sheet1.row(0).concat %w{姓名 生日 電話 地址 備註}
+    i = 1
+
+
+    a.each do |contact|
+      b = []
+      b << contact.name
+      b << contact.birthday
+      b << contact.phone
+      b << contact.address
+      b << contact.remark
+      sheet1.row(i).replace(b)
+      i=i+1
+    end
+    
+    #binding.pry
+
+    spreadsheet = StringIO.new 
+    book.write spreadsheet 
+
+    #binding.pry
+    
+    return spreadsheet.string
+  end
 end
