@@ -1,7 +1,7 @@
 <div class="col-md-12">
   <div class="group">
     <%= link_to("公開的此頁面", public_path(current_user.id), class: "btn btn-success pull-left") %>
-    <%= link_to("新的點名表", new_team_path, class: "btn btn-primary pull-right") %>
+    <%= link_to("新增點名表", new_team_path, class: "btn btn-primary pull-right") %>
   </div>
   
   <table class="table table-hover table-striped">
@@ -10,6 +10,8 @@
         <th> # </th>
         <th> 聚會日期 </th>
         <th> 聚會人數 </th>
+        <th> 聚會人數(調整後) </th>
+        <th> 調整人數 </th>
       </tr>
     </thead>
     <tbody>
@@ -17,7 +19,12 @@
         <tr>
           <td > # </td>
           <td><%= link_to(team.when, team_path(team))  %></td>
-          <td><%= team.contact_teams.count %></td>
+          <td><%= team.contact_teams.size %></td>
+          <td><%= team.contact_teams.size + team.adjustment%></td>
+          <td>
+            <%=link_to(" ", add_adjustment_team_path(team), method: :post, class: "btn btn-sm btn-success glyphicon glyphicon-plus")%>
+            <%=link_to(" ", sub_adjustment_team_path(team), method: :post, class: "btn btn-sm btn-danger glyphicon glyphicon-minus")%>
+          </td>
           <td>
             <%=link_to("", edit_team_path(team), class: "btn btn-sm btn-info glyphicon glyphicon-pencil")%>
             <%= link_to("", team_path(team), method: :delete, data: {confirm: "你確定嗎？刪錯要重打歐！！！" }, class: "btn btn-sm btn-danger glyphicon glyphicon-trash") %>

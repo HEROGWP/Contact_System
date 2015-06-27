@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     member do 
       post 'join'
       post 'quit'
+      post 'add_adjustment'
+      post 'sub_adjustment'
     end
   end
   get 'birthday', to: 'teams#birthday'

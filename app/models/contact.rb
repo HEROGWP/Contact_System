@@ -28,14 +28,14 @@ class Contact < ActiveRecord::Base
     end
   end
   
-  def self.to_xls(a)
+  def self.to_xls(contacts)
     book = Spreadsheet::Workbook.new
     sheet1 = book.create_worksheet :name => '青蟲名單'
     sheet1.row(0).concat %w{姓名 生日 電話 地址 備註}
     i = 1
 
 
-    a.each do |contact|
+    contacts.each do |contact|
       b = []
       b << contact.name
       b << contact.birthday

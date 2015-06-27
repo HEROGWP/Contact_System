@@ -57,12 +57,27 @@ class TeamsController < ApplicationController
     redirect_to :back#, alert: "#{Contact.find(join_params[:format]).name}缺席"
   end
 
+  def add_adjustment
+    @team = Team.find(params[:id])
+    @team.adjustment = @team.adjustment + 1
+    @team.save
+    redirect_to teams_path
+  end
+
+  def sub_adjustment
+    @team = Team.find(params[:id])
+    @team.adjustment = @team.adjustment - 1
+    @team.save
+    redirect_to teams_path
+  end
+
   def birthday
     params[:mons] ||= {}
     @monthes = params[:mons].keys.map(&:to_i)
     #monthes = params[:mons].map(&:to_i)
     @birthday = current_user.contacts.where(month: @monthes).page(params[:page])
   end
+  
 
   def public
     @user = User.find(params[:id])
