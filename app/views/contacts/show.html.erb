@@ -5,6 +5,7 @@
         <th> # </th>
         <th> 聚會日期 </th>
         <th> 聚會人數 </th>
+        <th> 聚會人數(調整後) </th>
       </tr>
     </thead>
     <tbody>
@@ -12,7 +13,8 @@
         <tr>
           <td > # </td>
           <td><%= team.when  %></td>
-          <td><%= team.contact_teams.count %></td>
+          <td><%= team.contact_teams.size %></td>
+          <td><%= team.contact_teams.size + team.adjustment%></td>
         </tr>
       <% end %>
     </tbody>
