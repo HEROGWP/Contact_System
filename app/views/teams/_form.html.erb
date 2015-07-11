@@ -6,6 +6,9 @@
     <%= f.label "聚會日期" %>:
     <%= f.date_field :when, class: "form-control" %><br />
 
+    <%= f.label "備註" %>:
+    <%= f.text_area :remark, class: "form-control" %><br />
+
     <%#= f.collection_check_boxes :team, :contact_ids, Contact.all, :id,:name_with_initial%>
     
     <%#= f.collection_check_boxes :contact_ids, Contact.all, :id, :name_with_initial do |cb| %>

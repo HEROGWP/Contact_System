@@ -86,7 +86,7 @@ class TeamsController < ApplicationController
   private
 
   def team_params
-  	params.require(:team).permit(:when, :numbers)
+  	params.require(:team).permit(:when, :numbers, :remark)
   end
 
   def join_params

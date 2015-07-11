@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150627070240) do
+ActiveRecord::Schema.define(version: 20150711105527) do
 
   create_table "contact_teams", force: :cascade do |t|
     t.integer  "contact_id", limit: 4
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20150627070240) do
     t.integer  "contact_id",         limit: 4
     t.integer  "contact_team_count", limit: 4,     default: 0
     t.integer  "adjustment",         limit: 4,     default: 0
+    t.text     "remark",             limit: 65535
   end
 
   create_table "users", force: :cascade do |t|
