@@ -4,7 +4,7 @@ gem 'bootstrap-sass'
 gem "simple_form", "~> 3.1.0.rc2", github: "plataformatec/simple_form", branch: "master"
 gem "devise", "~> 3.4.1", github: "plataformatec/devise", branch: "master"
 gem 'will_paginate-bootstrap'
-gem 'therubyracer', platforms: :ruby
+# gem 'therubyracer', platforms: :ruby
 gem 'spreadsheet'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
@@ -40,7 +40,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   gem "brakeman", require: false
   gem "rails_best_practices", require: false
-  gem "mysql2"
+  gem "pg"
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

@@ -13,51 +13,54 @@
 
 ActiveRecord::Schema.define(version: 20150711105527) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "contact_teams", force: :cascade do |t|
-    t.integer  "contact_id", limit: 4
-    t.integer  "team_id",    limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.integer  "contact_id"
+    t.integer  "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "contacts", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name"
     t.date     "birthday"
-    t.string   "phone",      limit: 255
-    t.string   "address",    limit: 255
-    t.text     "remark",     limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.integer  "user_id",    limit: 4
-    t.integer  "month",      limit: 4
+    t.string   "phone"
+    t.string   "address"
+    t.text     "remark"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.integer  "month"
   end
 
   create_table "teams", force: :cascade do |t|
     t.date     "when"
-    t.text     "numbers",            limit: 65535
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
-    t.integer  "user_id",            limit: 4
-    t.integer  "contact_id",         limit: 4
-    t.integer  "contact_team_count", limit: 4,     default: 0
-    t.integer  "adjustment",         limit: 4,     default: 0
-    t.text     "remark",             limit: 65535
+    t.text     "numbers"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "user_id"
+    t.integer  "contact_id"
+    t.integer  "contact_team_count", default: 0
+    t.integer  "adjustment",         default: 0
+    t.text     "remark"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  limit: 255, default: "", null: false
-    t.string   "encrypted_password",     limit: 255, default: "", null: false
-    t.string   "reset_password_token",   limit: 255
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",     limit: 255
-    t.string   "last_sign_in_ip",        limit: 255
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
-    t.string   "name",                   limit: 255
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
