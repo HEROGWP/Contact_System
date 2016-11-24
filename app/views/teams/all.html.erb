@@ -1,4 +1,16 @@
 
+<style type="text/css">
+  #select_tag {
+    font-size: large;
+  }
+</style>
+
+
+<%= form_tag all_teams_path, :method => :post, :class => "center" do %>
+  <%= select_tag "year", options_for_select(@years, @year), :id => "select_tag" %>
+  <%= submit_tag "送出", :class => "btn btn-default btn-sm" %>
+<% end %>
+
 <canvas id="chart-area"></canvas>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

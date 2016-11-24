@@ -85,9 +85,10 @@ class TeamsController < ApplicationController
   end
 
   def all
-    @teams = current_user.teams.includes(:contact_teams).order(:when)
-    @data = @teams.map{ |team|[team.when.to_s, team.contact_teams.size]}
-    @data = @data.unshift(['月份', '聚會人數'])
+    @teams = current_user.teams.order(:when)
+    @years = ( ( @teams.first.year )..( @teams.last.year ) ).to_a.reverse
+    @year = params[:year] ||= @years.first
+    @teams = @teams.includes(:contact_teams).where("year = ?", @year)
     @when = @teams.map{ |team|team.when.to_s}
     @size = @teams.map{ |team|team.contact_teams.size + team.adjustment}
   end
