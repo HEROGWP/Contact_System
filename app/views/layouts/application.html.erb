@@ -9,9 +9,13 @@
 </head>
 <body>
   <%= render "commom/navbar" %>
-  <div class="container-fluid layout_me" >
-  	<%= notice_message %>
-    <%= yield %>
+  <div class="container layout_me">
+      <div class="row">        
+        <div class="col-md-12">
+        	<%= notice_message %>
+          <%= yield %>
+        </div>
+      </div>
   </div>
 
   <%= render "commom/footer" %>

@@ -1,3 +1,23 @@
 // Place all the styles related to the teams controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.person {
+  margin: 20px 0;
+  text-align: left;
+}
+
+.person > a {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 20px;
+}
+.person > p {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 30px;
+  margin: 0;
+}
+#box {
+  margin: 0 auto;
+  width: 200px;
+}

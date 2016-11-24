@@ -22,21 +22,3 @@
 .center{
  text-align: center;
 }
-
-.margin_left {
-  margin-left: 425px;
-}
-
-.table_width{
-  width: 150px; 
-}
-@media screen and (max-width: 767px) {
-  .margin_left {
-    margin-left: 100px;
-  }
-}
-@media screen and (max-device-width: 767 px) {
-  .margin_left {
-    margin-left: 100px;
-  }
-}
