@@ -9,6 +9,9 @@ Rails.application.routes.draw do
       post 'add_adjustment'
       post 'sub_adjustment'
     end
+    collection do
+      post 'all'
+    end
   end
   get 'birthday', to: 'teams#birthday'
   get '/public/:id', to: 'teams#public', as: 'public'

@@ -83,6 +83,14 @@ class TeamsController < ApplicationController
     @user = User.find(params[:id])
     @team_pages = @user.teams.paginate(:page => params[:page], :per_page => 11).order(when: :DESC)
   end
+
+  def all
+    @teams = current_user.teams.includes(:contact_teams).order(:when)
+    @data = @teams.map{ |team|[team.when.to_s, team.contact_teams.size]}
+    @data = @data.unshift(['月份', '聚會人數'])
+    @when = @teams.map{ |team|team.when.to_s}
+    @size = @teams.map{ |team|team.contact_teams.size + team.adjustment}
+  end
   private
 
   def team_params

@@ -16,5 +16,6 @@ create_contacts = for i in 1..30 do
                    Contact.create!([name: "蔡建弘#{i}", birthday: "#{Date.today+(i*15)}", user_id: "1"])
                   end
 create_teams =    for k in 1..30 do
-                    Team.create!([when: "#{Date.today+i+(k*15)}", user_id: "1"])
+                    team = Team.create!(when: "#{Date.today+i+(k*15)}", user_id: "1", :member_ids => rand(1..30).times.map{rand(1..30)})
                   end
+
