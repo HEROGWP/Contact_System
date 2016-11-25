@@ -88,7 +88,8 @@ class TeamsController < ApplicationController
     @teams = current_user.teams.order(:when)
     @years = ( ( @teams.first.year )..( @teams.last.year ) ).to_a.reverse
     @year = params[:year] ||= @years.first
-    @teams = @teams.includes(:contact_teams).where("year = ?", @year)
+    @monthes = params[:monthes] ||= "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12"
+    @teams = @teams.includes(:contact_teams).where(year: @year, month: @monthes.split(", ").map(&:to_i) )
     @when = @teams.map{ |team|team.when.to_s}
     @size = @teams.map{ |team|team.contact_teams.size + team.adjustment}
   end

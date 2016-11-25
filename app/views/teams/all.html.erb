@@ -1,13 +1,14 @@
 
 <style type="text/css">
-  #select_tag {
+  .select_tag {
     font-size: large;
   }
 </style>
 
 
 <%= form_tag all_teams_path, :method => :post, :class => "center" do %>
-  <%= select_tag "year", options_for_select(@years, @year), :id => "select_tag" %>
+  <%= select_tag "year", options_for_select(@years, @year), :class => "select_tag" %>
+  <%= select_tag "monthes", options_for_select( { "全部" => "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12", "第一季" => "1, 2, 3", "第二季" => "4, 5, 6", "第三季" => "7, 8, 9", "第四季" => "10, 11, 12" }, @monthes ), :class => "select_tag" %>
   <%= submit_tag "送出", :class => "btn btn-default btn-sm" %>
 <% end %>
 
