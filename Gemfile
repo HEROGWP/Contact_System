@@ -38,6 +38,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 gem "pg"
+gem "redis"
+gem "nokogiri"
+gem "paperclip", "~> 5.0.0"
 #for heroku
 #gem 'rails_12factor'
 
