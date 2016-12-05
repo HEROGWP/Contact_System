@@ -37,11 +37,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem "pg"
+#for heroku
+#gem 'rails_12factor'
+
 group :development, :test do
   gem "brakeman", require: false
   gem "rails_best_practices", require: false
-  gem "pg"
-
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'pry-byebug'
@@ -54,9 +56,4 @@ group :development, :test do
   gem 'capistrano-rails', :group => :development
   gem 'capistrano-passenger', :group => :development
 
-end
-
-group :production do
-  gem "pg"
-  gem 'rails_12factor'
 end
