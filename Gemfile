@@ -59,4 +59,8 @@ group :development, :test do
   gem 'capistrano-rails', :group => :development
   gem 'capistrano-passenger', :group => :development
 
+  gem 'rspec-rails'
+  gem 'rails-controller-testing'
+  gem 'factory_girl_rails'
+
 end
