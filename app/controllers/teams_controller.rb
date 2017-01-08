@@ -44,9 +44,9 @@ class TeamsController < ApplicationController
     @team = Team.find(params[:id])
     if !@team.contact_teams.where(contact_id: join_params[:format]).present?
       @contact = @team.contact_teams.create(contact_id: join_params[:format])
-      redirect_to :back#, notice: "#{Contact.find(join_params[:format]).name}點名成功"
+      redirect_to team_path(@team)#, notice: "#{Contact.find(join_params[:format]).name}點名成功"
     else
-      redirect_to :back#, notice: "#{Contact.find(join_params[:format]).name}點名成功"
+      redirect_to team_path(@team)#, notice: "#{Contact.find(join_params[:format]).name}點名成功"
     end 
   end
   
@@ -54,7 +54,7 @@ class TeamsController < ApplicationController
     @team = Team.find(params[:id])
     @contact = @team.contact_teams.find_by(contact_id: join_params[:format])
     @contact.destroy
-    redirect_to :back#, alert: "#{Contact.find(join_params[:format]).name}缺席"
+    redirect_to team_path(@team)#, alert: "#{Contact.find(join_params[:format]).name}缺席"
   end
 
   def add_adjustment
