@@ -1,0 +1,3 @@
+$(".contact<%= @contact.id%>").remove();
+var button = '<%=link_to "", join_team_path(@team.id, contact: @contact), method: :post, class: "btn btn-danger btn-lg glyphicon glyphicon-remove contact#{@contact.id}", :remote => true %>' ;
+$("#contact<%= @contact.id%>").prepend(button);

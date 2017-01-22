@@ -17,7 +17,6 @@ class TeamsController < ApplicationController
   end
 
   def edit
-    #binding.pry
   	@team = current_user.teams.find(params[:id])
   end
  
@@ -29,7 +28,6 @@ class TeamsController < ApplicationController
 
   def show
     @team = current_user.teams.find(params[:id])
-    #@contacts = current_user.contacts.all
   	@contacts = current_user.contacts.paginate(:page => params[:page], :per_page => 10)
   end
 
@@ -42,19 +40,20 @@ class TeamsController < ApplicationController
   
   def join
     @team = Team.find(params[:id])
-    if !@team.contact_teams.where(contact_id: join_params[:format]).present?
-      @contact = @team.contact_teams.create(contact_id: join_params[:format])
-      redirect_to team_path(@team)#, notice: "#{Contact.find(join_params[:format]).name}點名成功"
-    else
-      redirect_to team_path(@team)#, notice: "#{Contact.find(join_params[:format]).name}點名成功"
-    end 
+    if !@team.contact_teams.where(contact_id: join_params[:contact]).present?
+      @team.contact_teams.create(contact_id: join_params[:contact])
+    end
+    @contact = Contact.find(join_params[:contact])
   end
+
   
   def quit
     @team = Team.find(params[:id])
-    @contact = @team.contact_teams.find_by(contact_id: join_params[:format])
-    @contact.destroy
-    redirect_to team_path(@team)#, alert: "#{Contact.find(join_params[:format]).name}缺席"
+    @contact_team = @team.contact_teams.find_by(contact_id: join_params[:contact])
+    @contact_team.destroy
+
+    @contact = Contact.find(join_params[:contact])
+    
   end
 
   def add_adjustment
@@ -100,6 +99,6 @@ class TeamsController < ApplicationController
   end
 
   def join_params
-    params.permit(:format)
+    params.permit(:contact)
   end
 end
