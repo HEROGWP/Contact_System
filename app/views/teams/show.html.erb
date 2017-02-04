@@ -3,10 +3,10 @@
   <% @contacts.each do |contact| %>
     
     <div class="person" id="contact<%= contact.id%>">
-      <%if !@team.contact_teams.where(contact_id: contact).present? %>
-        <%=link_to "", join_team_path(@team.id, contact: contact), method: :post, class: "btn btn-danger btn-lg glyphicon glyphicon-remove contact#{contact.id}", :remote => true %> 
-      <% else %>
+      <% if ContactTeam.exists?(team_id: @team.id, contact_id: contact.id) %>
         <%=link_to "", quit_team_path(@team.id, contact: contact), method: :post, class: "btn btn-success btn-lg glyphicon glyphicon-ok contact#{contact.id}", :remote => true %>
+      <% else %>
+        <%=link_to "", join_team_path(@team.id, contact: contact), method: :post, class: "btn btn-danger btn-lg glyphicon glyphicon-remove contact#{contact.id}", :remote => true %> 
       <% end %>
       
       <p><%= contact.name %></p>

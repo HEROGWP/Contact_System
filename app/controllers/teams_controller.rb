@@ -44,6 +44,10 @@ class TeamsController < ApplicationController
       @team.contact_teams.create(contact_id: join_params[:contact])
     end
     @contact = Contact.find(join_params[:contact])
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   
@@ -53,7 +57,10 @@ class TeamsController < ApplicationController
     @contact_team.destroy
 
     @contact = Contact.find(join_params[:contact])
-    
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   def add_adjustment
