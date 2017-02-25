@@ -112,6 +112,7 @@ GEM
     coffee-script-source (1.9.0)
     colored (1.2)
     columnize (0.9.0)
+    database_cleaner (1.5.3)
     debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
     diff-lcs (1.2.5)
@@ -296,6 +297,7 @@ DEPENDENCIES
   capistrano-passenger
   capistrano-rails
   coffee-rails (~> 4.1.0)
+  database_cleaner
   devise (~> 3.4.1)!
   factory_girl_rails
   jbuilder (~> 2.0)
