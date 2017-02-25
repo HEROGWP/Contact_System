@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe TeamsController, type: :request do
-  let!(:user) { create(:user, email: "test@gmail.com") }
+  let!(:user) { create(:user_has_contact_and_team_join_one) }
   before(:each) { login_user(user) }
-  let!(:team) { create(:team, user_id: user.id) }
+  let(:contact) { user.contacts.first }
+  let(:team) { user.teams.first }
 
   
   describe "GET /teams" do
@@ -132,33 +133,37 @@ RSpec.describe TeamsController, type: :request do
       it{ expect(response).to be_success }
       it{ expect(response).to have_http_status(200) }
       it{ expect(response).to render_template("teams/show") }
-      it{ expect(response.body).to include("#{user.name}") }
+      it{ expect(response.body).to include("#{contact.name}") }
 
     end 
 
   end
 
-  # describe "POST /teams/:id/join" do
-  #   let!(:contact) { create(:contact, user_id: user.id) }
-  #   context "join team success" do
-  #     before do
-  #       post join_team_path(team.id, contact: contact)
-  #     end
+  describe "POST /teams/:id/join" do
+    let!(:contact) { create(:contact, user_id: user.id) }
+    context "join team success" do
+      before do
+        post "/teams/#{team.id}/join.js", contact: contact.id, xhr: true
+      end
 
-  #     it{ expect(response).to be_success }
-  #     it{ expect(response).to have_http_status(200) }
-  #     it{ expect(response).to render_template("teams/show") }
-  #     it{ expect(response.body).to include("btn-success") }
-  #   end
+      it{ expect(response).to be_success }
+      it{ expect(response).to have_http_status(200) }
+      it{ expect(response).to render_template("teams/join") }
+      it{ expect(response.body).to include("btn-success") }
+    end
+  end
 
-  #   context "join team failed" do
-  #     before do
-  #       post "/teams/#{team.id}/join"
-  #       follow_redirect!
-  #     end
+  describe "POST /teams/:id/quit" do
+    context "quit team success" do
+      before do
+        post "/teams/#{team.id}/quit.js", contact: contact.id, xhr: true
+      end
 
-  #     it{ expect(response.body).to include("btn-danger") }
-  #   end
-  # end
+      it{ expect(response).to be_success }
+      it{ expect(response).to have_http_status(200) }
+      it{ expect(response).to render_template("teams/quit") }
+      it{ expect(response.body).to include("btn-danger") }
+    end
+  end
 
 end

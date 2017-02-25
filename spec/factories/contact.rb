@@ -1,5 +1,5 @@
 FactoryGirl.define do
-	factory :contact do
+	factory :contact, class: Contact do
 		sequence :name do |n|
 			"蔡建弘#{n}"
 		end

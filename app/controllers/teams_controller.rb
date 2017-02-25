@@ -40,10 +40,10 @@ class TeamsController < ApplicationController
   
   def join
     @team = Team.find(params[:id])
-    if !@team.contact_teams.where(contact_id: join_params[:contact]).present?
-      @team.contact_teams.create(contact_id: join_params[:contact])
+    if !@team.contact_teams.where(contact_id: contact_params[:contact]).present?
+      @team.contact_teams.create(contact_id: contact_params[:contact])
     end
-    @contact = Contact.find(join_params[:contact])
+    @contact = Contact.find(contact_params[:contact])
 
     respond_to do |format|
       format.js
@@ -53,10 +53,10 @@ class TeamsController < ApplicationController
   
   def quit
     @team = Team.find(params[:id])
-    @contact_team = @team.contact_teams.find_by(contact_id: join_params[:contact])
+    @contact_team = @team.contact_teams.find_by(contact_id: contact_params[:contact])
     @contact_team.destroy
 
-    @contact = Contact.find(join_params[:contact])
+    @contact = Contact.find(contact_params[:contact])
 
     respond_to do |format|
       format.js
@@ -105,7 +105,7 @@ class TeamsController < ApplicationController
   	params.require(:team).permit(:when, :numbers, :remark)
   end
 
-  def join_params
+  def contact_params
     params.permit(:contact)
   end
 end
