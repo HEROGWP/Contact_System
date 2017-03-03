@@ -11,10 +11,11 @@ RSpec.describe TeamsController, type: :request do
   
     subject! { get "/teams" }
     
-    it { expect(response).to be_success }
-    it { expect(response).to have_http_status(200) }
-    it { expect(response).to render_template("teams/index") }
-  
+    it{ expect(response).to be_success }
+    it{ expect(response).to have_http_status(200) }
+    it{ expect(response).to render_template("teams/index") }
+    it{ expect(response.body).to include("#{team.when}") }
+
   end
 
   describe "POST /teams" do
@@ -34,8 +35,8 @@ RSpec.describe TeamsController, type: :request do
       
       end
       
-      it { expect(response).to have_http_status(302) }
-      it { expect(response).to redirect_to(teams_url) }
+      it{ expect(response).to have_http_status(302) }
+      it{ expect(response).to redirect_to(teams_url) }
 
       it do 
       
@@ -78,9 +79,9 @@ RSpec.describe TeamsController, type: :request do
       
       end
 
-      it { expect(response).to have_http_status(302) }
-      it { expect(response).to redirect_to(teams_url) }
-      it { expect(flash[:notice]).to eq("修改成功") }
+      it{ expect(response).to have_http_status(302) }
+      it{ expect(response).to redirect_to(teams_url) }
+      it{ expect(flash[:notice]).to eq("修改成功") }
       it do 
       
         follow_redirect! 
@@ -109,9 +110,9 @@ RSpec.describe TeamsController, type: :request do
 
     context "destroy team success" do
 
-      it { expect(response).to have_http_status(302) }
-      it { expect(response).to redirect_to( teams_url ) }
-      it { expect(flash[:alert]).to eq("刪除成功") }
+      it{ expect(response).to have_http_status(302) }
+      it{ expect(response).to redirect_to( teams_url ) }
+      it{ expect(flash[:alert]).to eq("刪除成功") }
       it do 
       
         follow_redirect! 

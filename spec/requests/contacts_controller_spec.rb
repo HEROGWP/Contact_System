@@ -10,9 +10,9 @@ RSpec.describe ContactsController, type: :request do
   
     subject! { get "/contacts" }
     
-    it { expect(response).to be_success }
-    it { expect(response).to have_http_status(200) }
-    it { expect(response).to render_template("contacts/index") }
+    it{ expect(response).to be_success }
+    it{ expect(response).to have_http_status(200) }
+    it{ expect(response).to render_template("contacts/index") }
   
   end
 
@@ -34,8 +34,8 @@ RSpec.describe ContactsController, type: :request do
       
       end
       
-      it { expect(response).to have_http_status(302) }
-      it { expect(response).to redirect_to(contacts_url) }
+      it{ expect(response).to have_http_status(302) }
+      it{ expect(response).to redirect_to(contacts_url) }
 
       it do 
       
@@ -79,9 +79,9 @@ RSpec.describe ContactsController, type: :request do
       
       end
 
-      it { expect(response).to have_http_status(302) }
-      it { expect(response).to redirect_to(contacts_url) }
-      it { expect(flash[:notice]).to eq("此名單修改成功") }
+      it{ expect(response).to have_http_status(302) }
+      it{ expect(response).to redirect_to(contacts_url) }
+      it{ expect(flash[:notice]).to eq("此名單修改成功") }
       it do 
       
         follow_redirect! 
@@ -110,9 +110,9 @@ RSpec.describe ContactsController, type: :request do
 
     context "destroy contact success" do
 
-      it { expect(response).to have_http_status(302) }
-      it { expect(response).to redirect_to( contacts_url ) }
-      it { expect(flash[:alert]).to eq("此名單已刪除") }
+      it{ expect(response).to have_http_status(302) }
+      it{ expect(response).to redirect_to( contacts_url ) }
+      it{ expect(flash[:alert]).to eq("此名單已刪除") }
       it do 
       
         follow_redirect! 
