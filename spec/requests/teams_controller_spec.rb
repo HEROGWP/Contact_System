@@ -190,4 +190,15 @@ RSpec.describe TeamsController, type: :request do
     end
   end
 
+  describe "GET /public/:id" do
+  
+    subject! { get "/public/#{user.id}" }
+    
+    it{ expect(response).to be_success }
+    it{ expect(response).to have_http_status(200) }
+    it{ expect(response).to render_template("teams/public") }
+    it{ expect(response.body).to include("#{team.when}") }
+    
+  end
+
 end
