@@ -6,8 +6,7 @@ Rails.application.routes.draw do
     member do 
       post 'join'
       post 'quit'
-      post 'add_adjustment'
-      post 'sub_adjustment'
+      post 'adjustment'
     end
     collection do
       post 'all'

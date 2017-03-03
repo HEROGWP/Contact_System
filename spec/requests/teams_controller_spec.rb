@@ -166,4 +166,28 @@ RSpec.describe TeamsController, type: :request do
     end
   end
 
+  describe "POST /teams/:id/adjustment" do
+    context "add adjustment success" do
+      before do
+        post "/teams/#{team.id}/adjustment.js", adjustment: "add", xhr: true
+      end
+
+      it{ expect(response).to be_success }
+      it{ expect(response).to have_http_status(200) }
+      it{ expect(response).to render_template("teams/adjustment") }
+      it{ expect(response.body).to include("var adjustment = 2;") }
+    end
+
+    context "sub adjustment success" do
+      before do
+        post "/teams/#{team.id}/adjustment.js", adjustment: "sub", xhr: true
+      end
+
+      it{ expect(response).to be_success }
+      it{ expect(response).to have_http_status(200) }
+      it{ expect(response).to render_template("teams/adjustment") }
+      it{ expect(response.body).to include("var adjustment = 0;") }
+    end
+  end
+
 end

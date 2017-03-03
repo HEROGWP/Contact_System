@@ -63,18 +63,17 @@ class TeamsController < ApplicationController
     end
   end
 
-  def add_adjustment
+  def adjustment
     @team = Team.find(params[:id])
-    @team.adjustment = @team.adjustment + 1
-    @team.save
-    redirect_to teams_path
-  end
+    if params[:adjustment] == "add"
+      @team.increment!(:adjustment)
+    elsif params[:adjustment] == "sub"
+      @team.decrement!(:adjustment)
+    end
 
-  def sub_adjustment
-    @team = Team.find(params[:id])
-    @team.adjustment = @team.adjustment - 1
-    @team.save
-    redirect_to teams_path
+    respond_to do |format|
+      format.js
+    end
   end
 
   def birthday

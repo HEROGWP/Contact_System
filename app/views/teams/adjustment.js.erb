@@ -1,0 +1,4 @@
+var adjustment = <%= @team.contact_teams.size + @team.adjustment%>;
+
+$( "#adjustment_<%= @team.id%>" ).empty();
+$( "#adjustment_<%= @team.id%>" ).append(adjustment);
