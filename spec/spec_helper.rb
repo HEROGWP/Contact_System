@@ -16,6 +16,22 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+#----------------------------
+# SimpleCov 相關的一定要擺最上面
+#----------------------------
+require 'simplecov'
+
+SimpleCov.start do
+  add_group 'Controllers', 'app/controllers'
+  add_group 'Models', 'app/models'
+  add_group 'Helpers', 'app/helpers'
+  add_group 'Libraries', 'lib'
+
+  track_files "app/**/*.rb"
+
+  add_filter "/spec/"
+end
+
 RSpec.configure do |config|
   # Use color in STDOUT
   config.color = true
