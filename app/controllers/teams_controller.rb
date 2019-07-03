@@ -4,6 +4,7 @@ class TeamsController < ApplicationController
   
   def index
   	#@teams = Team.all.order(when: :DESC)
+    redirect_to birthday_path if current_user.email == 'cmes51036@gmail.com'
     @team_pages = current_user.teams.page(params[:page]).order(when: :DESC)
   end
 
