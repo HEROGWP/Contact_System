@@ -78,9 +78,13 @@ class TeamsController < ApplicationController
 
   def birthday
     params[:mons] ||= {}
-    @monthes = params[:mons].keys.map(&:to_i)
-    #monthes = params[:mons].map(&:to_i)
-    @birthday = current_user.contacts.where(month: @monthes).page(params[:page])
+    if params[:name]
+      @birthday = current_user.contacts.where('name like ?', "%#{params[:name]}%").page(params[:page])
+    else
+      @monthes = params[:mons].keys.map(&:to_i)
+      #monthes = params[:mons].map(&:to_i)
+      @birthday = current_user.contacts.where(month: @monthes).page(params[:page])
+    end
   end
   
 
